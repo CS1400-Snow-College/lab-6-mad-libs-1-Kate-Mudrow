@@ -23,13 +23,22 @@ foreach (string word in storyWords)
     {
         wordPrompt = word;
         multiWordsPrompt = true;
-
+        
         if (word.EndsWith(")")) //single word for prompt
         {
             string wordType = wordPrompt.Trim('(', ')');
-            Console.Write($"Please give me a {wordType}: ");
-            string userWord = Console.ReadLine().ToLower();
-            newStory += userWord + " ";
+            if ("aeiou".Contains(char.ToLower(wordType[0]))) //word type starts with vowel
+            {
+                Console.Write($"Please give me an {wordType}: ");
+                string userWord = Console.ReadLine().ToUpper();
+                newStory += userWord + " ";
+            }
+            else
+            {
+                Console.Write($"Please give me a {wordType}: ");
+                string userWord = Console.ReadLine().ToUpper();
+                newStory += userWord + " ";
+            }
             multiWordsPrompt = false;
         }
 
@@ -42,7 +51,7 @@ foreach (string word in storyWords)
         {
             string wordType = wordPrompt.Trim('(', ')');
             Console.Write($"Please give me a {wordType}: ");
-            string userWord = Console.ReadLine().ToLower();
+            string userWord = Console.ReadLine().ToUpper();
             newStory += userWord + " ";
             multiWordsPrompt = false;
         }
@@ -52,5 +61,6 @@ foreach (string word in storyWords)
     {
         newStory += word + " ";
     }
-    }
+}
+
     Console.WriteLine(newStory);
