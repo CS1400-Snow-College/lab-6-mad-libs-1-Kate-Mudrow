@@ -5,7 +5,7 @@ Lab: Lab 6 Mad Libs
 */
 
 Console.Clear();
-Console.WriteLine("This is Mad Libs. When you are dong providing the requested words\nI will build them into a funny story for you.\nEnter the requested word types as they appear.");
+Console.WriteLine("This is Mad Libs. When you are done providing the requested words\nI will build them into a funny story for you.\nEnter the requested word types as they appear.");
 Console.WriteLine("Press any key to begin");
 Console.ReadKey(true);
 
@@ -23,7 +23,53 @@ foreach (string word in storyWords)
     {
         wordPrompt = word;
         multiWordsPrompt = true;
-        
+
+        if (word.EndsWith(")") || word.EndsWith(")."))//single word for prompt
+        {
+            string wordType = wordPrompt.Trim('(', ')', '.');
+            if ("aeiou".Contains(char.ToLower(wordType[0]))) //word type starts with vowel
+            {
+                Console.Write($"Please give me an {wordType}: ");
+                string userWord = Console.ReadLine().ToUpper();
+                newStory += userWord + " ";
+                multiWordsPrompt = false;
+            }
+            else
+            {
+                Console.Write($"Please give me a {wordType}: ");
+                string userWord = Console.ReadLine().ToUpper();
+                newStory += userWord + " ";
+                multiWordsPrompt = false;
+            }
+        }
+    }
+    else if (multiWordsPrompt) //multi words prompt
+    {
+        wordPrompt += " " + word;
+        if (word.EndsWith(")") || word.EndsWith (")."))
+        {
+            string wordType = wordPrompt.Trim('(', ')', '.');
+            Console.Write($"Please give me a {wordType}: ");
+            string userWord = Console.ReadLine().ToUpper();
+            newStory += userWord + " ";
+            multiWordsPrompt = false;
+        }
+    }
+    else
+    {
+        newStory += word + " ";
+    }
+}
+Console.Write(newStory);
+
+
+
+
+    /*if (word.StartsWith("(")) //Find start of prompt words
+    {
+        wordPrompt = word;
+        multiWordsPrompt = true;
+
         if (word.EndsWith(")")) //single word for prompt
         {
             string wordType = wordPrompt.Trim('(', ')');
@@ -32,35 +78,35 @@ foreach (string word in storyWords)
                 Console.Write($"Please give me an {wordType}: ");
                 string userWord = Console.ReadLine().ToUpper();
                 newStory += userWord + " ";
+                multiWordsPrompt = false;
             }
             else
             {
                 Console.Write($"Please give me a {wordType}: ");
                 string userWord = Console.ReadLine().ToUpper();
                 newStory += userWord + " ";
+                multiWordsPrompt = false;
             }
-            multiWordsPrompt = false;
         }
 
-    }
-    else if (multiWordsPrompt) //multi words prompt
-    {
-        wordPrompt += " " + word;
-
-        if (word.EndsWith(")"))
+        else if (multiWordsPrompt) //multi words prompt
         {
-            string wordType = wordPrompt.Trim('(', ')');
-            Console.Write($"Please give me a {wordType}: ");
-            string userWord = Console.ReadLine().ToUpper();
-            newStory += userWord + " ";
-            multiWordsPrompt = false;
+            wordPrompt += " " + word;
+            if (word.EndsWith(")"))
+            {
+                string wordType = wordPrompt.Trim('(', ')');
+                Console.Write($"Please give me a {wordType}: ");
+                string userWord = Console.ReadLine().ToUpper();
+                newStory += userWord + " ";
+                multiWordsPrompt = false;
+            }
         }
-    }
 
-    else //other words
-    {
-        newStory += word + " ";
+        else //other words
+        {
+            newStory += word + " ";
+        }
+
     }
 }
-
-    Console.WriteLine(newStory);
+    Console.Write(newStory);*/
